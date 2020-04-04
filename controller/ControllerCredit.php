@@ -6,4 +6,8 @@ class ControllerCredit{
         require('view/viewAmortizationTable.php');
     }
 
+    public function testAPI(){
+        require('view/viewTryApi.php'); 
+    }
+
     }

@@ -6,6 +6,8 @@ use P5\Controller\ControllerChapter;
 use P5\Controller\ControllerUser;
 use P5\Gestion\Gestion;
 use P5\Controller\ControllerCredit;
+use P5\Routeur\Routeur;
+//require_once('routeur/Routeur.php');
 
 require('gestion/Autoloader.php');
 Autoloader::register();
@@ -121,6 +123,8 @@ try {
                 $controllerCredit = new ControllerCredit();
                 if($_GET['action'] === "amortizationTable"){
                     $controllerCredit->amortizationTable();
+                }elseif($_GET['action'] === "api"){
+                    $controllerCredit->testApi();
                 }
             }
             elseif($_GET['type'] === "test" && $_GET['action'] === "hash"){
@@ -146,3 +150,32 @@ catch(Exception $e) {
     die ('Erreur : ' . $e->getMessage());
 
 }
+
+//var_dump($_GET['url']);
+
+/*$routeur = new Routeur($_GET['url']);
+
+if($_SERVER['REQUEST_METHOD'] === "GET")
+{
+    $routeur->get('/\w{0}/', function(){ require('view/viewHome.php'); });
+    $routeur->get('article/:id', function($id)
+    {
+        $controllerChapter->chapterList($id);
+    });
+    
+    if(isset($_SESSION['admin']) && $_SESSION['admin']  === "1")
+    {
+
+
+
+    }
+}
+elseif($_SERVER['REQUEST_METHOD'] === "POST")
+{
+    if(isset($_SESSION['admin']) && $_SESSION['admin']  === "1")
+    {
+
+    }
+}
+
+echo $routeur->run();*/

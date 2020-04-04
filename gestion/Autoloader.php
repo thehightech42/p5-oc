@@ -7,6 +7,8 @@ class Autoloader{
        $controller = strpos($class, 'Controller');
        $model = strpos($class, 'Management');
        $gestion = strpos($class, 'Gestion');
+       $routeur = strpos($class, 'Route');
+
        if($controller !== FALSE){
            $class = str_replace('P5\Controller\\', 'controller/', $class);
            require($class.".php");
@@ -17,6 +19,10 @@ class Autoloader{
        }
        elseif ($gestion !== FALSE){
            $class = str_replace('P5\Gestion\\', 'gestion/', $class);
+           require($class.".php");
+       }
+       elseif ($routeur !== False){
+           $class = str_replace('P5\Routeur\\', 'routeur/', $class);
            require($class.".php");
        }
    }

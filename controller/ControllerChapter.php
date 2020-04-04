@@ -6,9 +6,11 @@ use P5\Model\ManagementChapter;
 
         private $_managementChapter;
 
+
         function __construct()
         {
             $this->_managementChapter = new ManagementChapter;
+
         }
 
         public function chapterList(){

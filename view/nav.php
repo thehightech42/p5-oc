@@ -17,8 +17,12 @@ require('env.php')
                 <a class="nav-link" href="/?type=credit&action=amortizationTable">Générer un tableau </br> d'amortissement</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="/?type=credit&action=api">API</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="/?type=user&action=forContact">Contact</a>
             </li>
+            
             <?php
                 if(isset($_SESSION['admin']) && $_SESSION['admin'] === "1"){
                     ?>
