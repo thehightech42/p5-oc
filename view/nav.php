@@ -6,31 +6,31 @@ require('env.php')
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="/?type=home">Antonin</br>PFISTNER</a>
+    <a class="navbar-brand pr-5" href="/">Antonin</br>PFISTNER</a>
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-        <ul class="navbar-nav mr-auto ">
-            <li class="nav-item">
-                <a class="nav-link" href="/?type=chapter&action=chapterList">Articles</a>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item pr-2">
+                <a class="nav-link text-white" href="/?type=chapter&action=chapterList">Articles</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/?type=credit&action=amortizationTable">Générer un tableau </br> d'amortissement</a>
+            <li class="nav-item pr-2">
+                <a class="nav-link text-white" href="/?type=credit&action=amortizationTable">Générer un tableau </br> d'amortissement</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/?type=credit&action=api">API</a>
+            <li class="nav-item pr-2">
+                <a class="nav-link text-white" href="/?type=credit&action=api">API</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/?type=user&action=forContact">Contact</a>
+            <li class="nav-item pr-2">
+                <a class="nav-link text-white" href="/?type=user&action=forContact">Contact</a>
             </li>
             
             <?php
                 if(isset($_SESSION['admin']) && $_SESSION['admin'] === "1"){
                     ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="/?type=administration">Administration</br>des articles</a>
+                        <a class="nav-link text-white pr-2" href="/?type=administration">Administration</br>des articles</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/?type=chapter&action=forAddChapter">Ajouter un article</a>
+                        <a class="nav-link text-white pr-2" href="/?type=chapter&action=forAddChapter">Ajouter un article</a>
                     </li>
                     <?php
                 }
@@ -45,7 +45,7 @@ require('env.php')
             if(isset($_SESSION['pseudo'])){
                 ?>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <?= $_SESSION['pseudo'];?>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">

@@ -15,8 +15,6 @@ hr{
     min-height: 100vh;
 }
 
-
-
 .screen{
     min-height: 100vh;
     height: 100%;
@@ -63,7 +61,7 @@ hr{
 }
 
 .bg-test{
-    background-color: rgb(126, 47, 1);
+    background-color: rgba(0, 8, 15, 0.9);
 }
 
 .form-perso{
@@ -79,11 +77,16 @@ table{
 td{
     border: solid black 1px;
 }
-
-
-
-
-
+.img-article{
+    max-height: 50vh;
+    float:left;
+}
+.img-form-article{
+    max-height: 25vh;
+}
+.clearboth{
+    clear: both;
+}
 
 @media screen and (max-width: 640px) {
     .img-Alaska {
@@ -120,11 +123,14 @@ td{
         display: block;
         overflow: hidden;
     }
+    
+    .smart{
+        display: none;
+    }
 
     footer{
         position: relative;
         bottom: 0;
         width: 100%;
     }
-
 }

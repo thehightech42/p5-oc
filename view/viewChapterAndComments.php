@@ -16,12 +16,19 @@ $titlePage = "Article ". $use_chapter['chapter_number'] .' - ' .$use_chapter['ch
     <div>
         <h3>Article <?= $use_chapter['chapter_number'] .' - ' .$use_chapter['chapter_name']; ?></h3>
         <p class="mb-4">Publié le <?=$date['day'] ?> <?= $monthLetter ?> <?= $date['year'] ?></p>
+        <?php
+        if($use_chapter['src_img'] !== "1"){
+            ?>
+            <img src="<?= $use_chapter['src_img']?>" alt="" class="img-article img-fluid pr-2"/>
+            <?php
+        }
+        ?>
 
-        <p class="mb-0"><?= $use_chapter['chapter_content']; ?></p>
+        <p class="mb-0" ><?= $use_chapter['chapter_content']; ?></p>
     </div>
 
 
-    <div class="mt-5">
+    <div class="mt-5 clearboth">
         <h4>Commentaires :</h4>
 <?php
 
@@ -57,7 +64,7 @@ while($comment = $comments->fetch()){
             </div>
 
             <div class="col-lg-2">
-                <a href="/?type=chapter&action=reportComment&idComment=<?= $comment['id']?>&idChapter=<?=$_GET['idChapter']?>" class="align-middle">Signaler</a>
+                <a href="/?type=chapter&action=reportComment&idComment=<?= $comment['id']?>&idChapter=<?=$id?>" class="align-middle">Signaler</a>
             </div>
     </div>
     <hr>
@@ -66,7 +73,9 @@ while($comment = $comments->fetch()){
 };
 ?>
     </div>
+
 <?php
+
 
 $content = ob_get_clean();
 

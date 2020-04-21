@@ -22,7 +22,7 @@ class Autoloader{
            require($class.".php");
        }
        elseif ($routeur !== False){
-           $class = str_replace('P5\Routeur\\', 'routeur/', $class);
+           $class = str_replace('P5\Router\\', 'Router/', $class);
            require($class.".php");
        }
    }

@@ -6,9 +6,9 @@ class ManagementBDD {
     {
         $this->_bd = $this->AccesBDD();
     }
-    private function AccesBDD(){
+    protected function AccesBDD(){
         require('env.php');
-        $bd = new \PDO('mysql:host='.$domaineBDD.';dbname='.$BDDName.';charset=utf8', ''.$username.'', ''.$password.'');
+        //$bd = new \PDO('mysql:host='.$domaineBDD.';dbname='.$BDDName.';charset=utf8', ''.$username.'', ''.$password.'');
         try{
             $bd = new \PDO('mysql:host='.$domaineBDD.';dbname='.$BDDName.';charset=utf8', ''.$username.'', ''.$password.'');
         }catch (\Exception $e){
@@ -21,5 +21,11 @@ class ManagementBDD {
         $date = $this->_bd->prepare('SELECT DAY(published_date) AS day, MONTH(published_date) AS month, YEAR(published_date) AS year FROM '.$table.' WHERE id = :id');
         $date->execute(array('id'=>$id));
         return $date;
+    }
+
+    public function id($table, $champs, $value)
+    {
+        $id = $this->_bd->query("SELECT id FROM $table WHERE $champs = $value");
+        return $id;
     }
 }

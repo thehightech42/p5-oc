@@ -28,13 +28,15 @@ class ManagementChapter extends ManagementBDD{
         return $number;
     }
 
-    public function registerChapter($chapter_name, $chapter_number, $chapter_content){
-        $registerChapter = $this->_bd->prepare('INSERT INTO chapters(chapter_name, chapter_number, chapter_content, published_date) VALUES(:chapter_name, :chapter_number, :chapter_content, NOW())');
+    public function registerChapter($chapter_name, $chapter_number, $chapter_content, $src){
+        $registerChapter = $this->_bd->prepare('INSERT INTO chapters(chapter_name, chapter_number, chapter_content, src_img, published_date) VALUES(:chapter_name, :chapter_number, :chapter_content, :src_img, NOW())');
         $registerChapter->execute(array(
             'chapter_name' => $chapter_name,
             'chapter_number' => $chapter_number,
-            'chapter_content' => $chapter_content
+            'chapter_content' => $chapter_content,
+            'src_img' => $src
         ));
+        return $registerChapter;
     }
 
     public function forUpdateChapter($id){
@@ -43,12 +45,23 @@ class ManagementChapter extends ManagementBDD{
         return $updateForChapter;
     }
 
-    public function updateChapter($idChapter, $chapter_name, $chapter_number, $chapter_content){
-        $updateChapter = $this->_bd->prepare('UPDATE chapters SET chapter_name= :chapter_name, chapter_number= :chapter_number, chapter_content= :chapter_content WHERE id = :id');
+    public function updateChapter($idChapter, $chapter_name, $chapter_number, $chapter_content, $src){
+        $updateChapter = $this->_bd->prepare('UPDATE chapters SET chapter_name= :chapter_name, chapter_number= :chapter_number, chapter_content= :chapter_content, src_img = :src_img WHERE id = :id');
         $updateChapter->execute(array(
             'chapter_name' => $chapter_name,
             'chapter_number' => $chapter_number,
             'chapter_content' => $chapter_content,
+            'src_img' => $src,
+            'id' => $idChapter
+        ));
+    }
+    public function deleteImg($idChapter, $chapter_name, $chapter_number, $chapter_content, $src){
+        $updateChapter = $this->_bd->prepare('UPDATE chapters SET chapter_name= :chapter_name, chapter_number= :chapter_number, chapter_content= :chapter_content, src_img = :src_img WHERE id = :id');
+        $updateChapter->execute(array(
+            'chapter_name' => $chapter_name,
+            'chapter_number' => $chapter_number,
+            'chapter_content' => $chapter_content,
+            'src_img' => $src,
             'id' => $idChapter
         ));
     }
@@ -93,5 +106,15 @@ class ManagementChapter extends ManagementBDD{
     public function tenLastComments(){
         $comments = $this->_bd->query('SELECT pseudo, content, DAY(published_date) AS day, MONTH(published_date) AS month, YEAR(published_date) AS year  FROM comments  ORDER BY id DESC LIMIT 10');
         return $comments;
+    }
+
+    public function elementsPagination($nbPerPage, $offSet){
+        $elements = $this->_bd->query("SELECT * FROM chapters ORDER BY chapter_number LIMIT $nbPerPage OFFSET $offSet");
+        return $elements;
+    }
+    
+    public function nbElements(){
+        $nb = $this->_bd->query("SELECT COUNT(id) FROM chapters")->fetch(\PDO::FETCH_NUM)[0];
+        return $nb;
     }
 }

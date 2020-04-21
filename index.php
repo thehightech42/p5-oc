@@ -1,16 +1,39 @@
 <?php
 ob_start();
 session_start();
+require 'vendor/autoload.php';
 
 use P5\Controller\ControllerChapter;
 use P5\Controller\ControllerUser;
 use P5\Gestion\Gestion;
 use P5\Controller\ControllerCredit;
-use P5\Routeur\Routeur;
-//require_once('routeur/Routeur.php');
+use P5\Router\Router;
+echo getcwd();
+// try{
+//     $router = new Router($_GET['url']);
+//     $router->get('/', function(){ require('view/viewHome.php'); });
+//     $router->get('/articles', "ControllerChapter;chapterList");
+//     $router->get('/article/:id', "ControllerChapter;chapterAndComments")->with('id', '[0-9]+');
+//     $router->get('/forContact', "ControllerUser;forContact");
+    
+//     $router->run();
+// }catch(Exception $e){
+//     die ('Erreur : ' . $e->getMessage());
+// }
 
-require('gestion/Autoloader.php');
-Autoloader::register();
+
+// echo trim($_SERVER['REQUEST_URI'], "/")."</br>";
+// echo $_GET['url'];
+// var_dump($_SERVER);
+
+// if(!isset($_GET['url'])){
+//     require('view/viewHome.php');
+// }else{
+//     $router = new Router($_GET['url']);
+// }
+
+// require('gestion/Autoloader.php');
+// Autoloader::register();
 
 try {
         if(isset($_GET['type']) && isset($_GET['action'])){
@@ -32,7 +55,13 @@ try {
                     $controller_chapter->chapterAndComments($_GET['idChapter']);
                 }
                 elseif($_GET['action'] === "chapterList"){
-                    $controller_chapter->chapterList();
+                    $page ;
+                    if(!isset($_GET['page'])){
+                        $page = 1;
+                    }else{
+                        $page = htmlspecialchars($_GET['page']);
+                    }
+                    $controller_chapter->chapterList($page);
                 }
                 elseif(($_GET["action"] === "forAddChapter" || $_GET['action'] === "addChapter" || $_GET['action'] === "forUpdateChapter" || $_GET['action'] === "updateChapter" || $_GET['action'] === "deleteChapter") &&
                     isset($_SESSION['admin']) && $_SESSION['admin'] === "1"){
@@ -40,13 +69,15 @@ try {
                         $controller_chapter->addChapter();
                     }
                     elseif($_GET['action'] === "addChapter"){
-                        $controller_chapter->registerChapter(htmlspecialchars($_POST['chapter_name']), htmlspecialchars($_POST['chapter_number']), $_POST['chapter_content']);
+                        $controller_chapter->registerChapter(htmlspecialchars($_POST['chapter_name']), htmlspecialchars($_POST['chapter_number']), $_POST['chapter_content'], $_FILES['chapter_image']);
                     }
                     elseif($_GET['action'] === "forUpdateChapter"){
                         $controller_chapter->forUpdateChapter($_GET['idChapter']);
                     }
                     elseif($_GET['action'] === "updateChapter"){
-                        $controller_chapter->updateChapter($_GET['idChapter'], htmlspecialchars($_POST['chapter_name']), htmlspecialchars($_POST['chapter_number']), $_POST['chapter_content']);
+
+                        $controller_chapter->updateChapter($_GET['idChapter'], htmlspecialchars($_POST['chapter_name']), htmlspecialchars($_POST['chapter_number']), $_POST['chapter_content'], $_FILES['chapter_image'], $_POST['deleteImg'] = 0);
+                        // var_dump($_POST);
                     }
                     elseif($_GET['action'] === "deleteChapter"){
                         $controller_chapter->deleteChapter($_GET['idChapter']);
@@ -107,7 +138,7 @@ try {
                     $controllerUser->forUpdatePassword();
                 }
                 elseif($_GET['action'] === "updatePassword"){
-                    $controllerUser->updatePassword(htmlspecialchars($_POST['last_password']), htmlspecialchars($_POST['new_password']), htmlspecialchars($_POST['new_password1']) );
+                    $controllerUser->updatePassword(htmlspecialchars($_POST['last_password']), htmlspecialchars($_POST['new_password']), htmlspecialchars($_POST['new_password1']));
                 }
                 elseif($_GET['action'] === "forContact"){
                     $controllerUser->forContact();
@@ -144,6 +175,7 @@ try {
         }
         else{
             require('view/viewHome.php');
+
         }
 }
 catch(Exception $e) {
@@ -151,31 +183,54 @@ catch(Exception $e) {
 
 }
 
-//var_dump($_GET['url']);
 
-/*$routeur = new Routeur($_GET['url']);
+// if(!isset($_GET['url'])){
+//     require('view/viewHome.php');
+// }else{
+//         $routeur = new Routeur($_GET['url']);
+//         $routeur->get('#article/([0-9]+)#', function($id)
+//         {
+//             $controllerChapter = new ControllerChapter;
+//             $controllerChapter->chapterAndComments($id);
+//         });
 
-if($_SERVER['REQUEST_METHOD'] === "GET")
-{
-    $routeur->get('/\w{0}/', function(){ require('view/viewHome.php'); });
-    $routeur->get('article/:id', function($id)
-    {
-        $controllerChapter->chapterList($id);
-    });
+//         $routeur->get('#articles#', function()
+//         {
+//             $controllerChapter = new ControllerChapter;
+//             $controllerChapter->chapterList();
+//         });
+//         $routeur->get('#forContact#', function()
+//         {
+//             $controllerUser = new ControllerUser; 
+//             $controllerUser->forContact();
+//         });
+//         $routeur->run();
+
+//         $routeur->get('article/:id', 'ControllerChapter;chapterAndComments')
     
-    if(isset($_SESSION['admin']) && $_SESSION['admin']  === "1")
-    {
+//     }
+//         $routeur->get('/', function(){ require('view/viewHome.php'); });
+       
+//         if(isset($_SESSION['admin']) && $_SESSION['admin']  === "1")
+//         {
+
+//         }
+//     }
+//     elseif($_SERVER['REQUEST_METHOD'] === "POST")
+//     {
+//         if(isset($_SESSION['admin']) && $_SESSION['admin']  === "1")
+//         {
+
+//         }
+//     }
+// $routeur = new Router($_GET['url']);
+
+// $routeur->get('/' , function(){
+//     require('view/viewHome.php');
+// });
+
+// $routeur->run();
+
+// }
 
 
-
-    }
-}
-elseif($_SERVER['REQUEST_METHOD'] === "POST")
-{
-    if(isset($_SESSION['admin']) && $_SESSION['admin']  === "1")
-    {
-
-    }
-}
-
-echo $routeur->run();*/

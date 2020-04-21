@@ -88,7 +88,7 @@ class ControllerUser{
         $testMail = $tryMail->rowCount();
         $resultMail = $tryMail->fetch();
         $resultPseudo = $tryPseudo->fetch();
-        if($testPseudo === 0 || $pseudo === $_SESSION['pseudo'] && $testMail === 0 || $mail === $_SESSION['mail']){
+        if( ($testPseudo == 0 || $pseudo === $_SESSION['pseudo']) && ($testMail == 0 || $mail === $_SESSION['mail'])){
             $this->_managementUser->updateAllUserInformation($first_name, $last_name, $pseudo, $mail);
             $_SESSION['mail'] = $mail;
             $_SESSION['pseudo'] = $pseudo;
