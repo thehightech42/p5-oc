@@ -57,13 +57,13 @@ if($comments->rowcount() == 0){
 
 while($comment = $comments->fetch()){
     ?>
-        <div class="row">
-            <div class="col-lg-10 mt-3">
+        <div class="row m-0">
+            <div class="col-lg-9 mt-3">
                 <p class="mb-0">Commentaire de : <?= $comment['pseudo'] ?> posté le <?=  $comment['day'] ?>.<?= $comment['month'] ?>.<?= $comment['year']?></p>
                 <p class="mb-0"><?= $comment['content']?></p>
             </div>
 
-            <div class="col-lg-2">
+            <div class="col-lg-2 p-0">
                 <a href="/?type=chapter&action=reportComment&idComment=<?= $comment['id']?>&idChapter=<?=$id?>" class="align-middle">Signaler</a>
             </div>
     </div>

@@ -32,7 +32,7 @@ require('env.php')
         <link rel="stylesheet" type="text/css" href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-shims.min.css" media="all">
         <link rel="stylesheet" type="text/css" href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-font-face.min.css" media="all">
         <link rel="stylesheet" type="text/css" href="https://kit-free.fontawesome.com/releases/latest/css/free.min.css" media="all">
-        <link rel="stylesheet" type="text/css" href="/style/style.css">
+        <link rel="stylesheet" type="text/css" href="<?= $pathStyle ?>">
     </head>
 
     <body>

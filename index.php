@@ -8,7 +8,7 @@ use P5\Controller\ControllerUser;
 use P5\Gestion\Gestion;
 use P5\Controller\ControllerCredit;
 use P5\Router\Router;
-echo getcwd();
+
 // try{
 //     $router = new Router($_GET['url']);
 //     $router->get('/', function(){ require('view/viewHome.php'); });
@@ -21,16 +21,6 @@ echo getcwd();
 //     die ('Erreur : ' . $e->getMessage());
 // }
 
-
-// echo trim($_SERVER['REQUEST_URI'], "/")."</br>";
-// echo $_GET['url'];
-// var_dump($_SERVER);
-
-// if(!isset($_GET['url'])){
-//     require('view/viewHome.php');
-// }else{
-//     $router = new Router($_GET['url']);
-// }
 
 // require('gestion/Autoloader.php');
 // Autoloader::register();
@@ -75,8 +65,14 @@ try {
                         $controller_chapter->forUpdateChapter($_GET['idChapter']);
                     }
                     elseif($_GET['action'] === "updateChapter"){
+                        // var_dump($_FILES['chapter_image']);
+                        if((!isset($_FILES['chapter_image']) )|| ($_FILES['chapter_image']['name'] == "")): 
+                            $file = 0; 
+                        else: 
+                            $file = $_FILES['chapter_image'];
+                        endif;
 
-                        $controller_chapter->updateChapter($_GET['idChapter'], htmlspecialchars($_POST['chapter_name']), htmlspecialchars($_POST['chapter_number']), $_POST['chapter_content'], $_FILES['chapter_image'], $_POST['deleteImg'] = 0);
+                        $controller_chapter->updateChapter($_GET['idChapter'], htmlspecialchars($_POST['chapter_name']), htmlspecialchars($_POST['chapter_number']), $_POST['chapter_content'], $file, $_POST['deleteImg'] = 0);
                         // var_dump($_POST);
                     }
                     elseif($_GET['action'] === "deleteChapter"){
@@ -182,55 +178,3 @@ catch(Exception $e) {
     die ('Erreur : ' . $e->getMessage());
 
 }
-
-
-// if(!isset($_GET['url'])){
-//     require('view/viewHome.php');
-// }else{
-//         $routeur = new Routeur($_GET['url']);
-//         $routeur->get('#article/([0-9]+)#', function($id)
-//         {
-//             $controllerChapter = new ControllerChapter;
-//             $controllerChapter->chapterAndComments($id);
-//         });
-
-//         $routeur->get('#articles#', function()
-//         {
-//             $controllerChapter = new ControllerChapter;
-//             $controllerChapter->chapterList();
-//         });
-//         $routeur->get('#forContact#', function()
-//         {
-//             $controllerUser = new ControllerUser; 
-//             $controllerUser->forContact();
-//         });
-//         $routeur->run();
-
-//         $routeur->get('article/:id', 'ControllerChapter;chapterAndComments')
-    
-//     }
-//         $routeur->get('/', function(){ require('view/viewHome.php'); });
-       
-//         if(isset($_SESSION['admin']) && $_SESSION['admin']  === "1")
-//         {
-
-//         }
-//     }
-//     elseif($_SERVER['REQUEST_METHOD'] === "POST")
-//     {
-//         if(isset($_SESSION['admin']) && $_SESSION['admin']  === "1")
-//         {
-
-//         }
-//     }
-// $routeur = new Router($_GET['url']);
-
-// $routeur->get('/' , function(){
-//     require('view/viewHome.php');
-// });
-
-// $routeur->run();
-
-// }
-
-

@@ -42,7 +42,7 @@ use P5\Gestion\CheckFile;
             require('view/viewAddChapter.php');
         }
 
-        public function registerChapter($chapter_name, $chapter_number, $chapter_content, $chapter_image = 1){
+        public function registerChapter($chapter_name, $chapter_number, $chapter_content, $chapter_image ){
             $informationChapter = [
                 "chapter_name"=>$chapter_name,
                 "chapter_number"=>$chapter_number,
@@ -56,8 +56,11 @@ use P5\Gestion\CheckFile;
                 unset($informationChapter['chapter_number']);
                 $echecAddChapter = $this->addChapter($informationChapter);
 
-            }else{
-                if($chapter_image['name'] !== ""){
+            }else{ 
+                if($chapter_image['name'] == ""):
+                    $chapter_image = 1;
+                endif;
+                if($chapter_image !== 1){
                     // echo"Img</br>";
                     $checkFile = new CheckFile(".jpg,.jpeg,.png,.gif", 5000000, $chapter_image);
                     $testFile = $checkFile->check();
@@ -99,7 +102,7 @@ use P5\Gestion\CheckFile;
             require('view/viewAddChapter.php');
         }
 
-        public function updateChapter($id, $chapter_name, $chapter_number, $chapter_content, $chapter_image =0 ,$deleteImg){
+        public function updateChapter($id, $chapter_name, $chapter_number, $chapter_content, $chapter_image ,$deleteImg){
             // echo $deleteImg."</br>";
             // var_dump($src)."</br>";
             $informationChapter = [
@@ -107,7 +110,6 @@ use P5\Gestion\CheckFile;
                 "chapter_number"=>$chapter_number,
                 "chapter_content"=>$chapter_content
             ];
-            var_dump($chapter_image);
             
             $numberChapterExist = $this->_managementChapter->tryNumberChapter($chapter_number);
             $exist = $numberChapterExist->rowCount();
@@ -119,7 +121,7 @@ use P5\Gestion\CheckFile;
 
             }
 
-            if($deleteImg === "Supprimer" || $chapter_image['name'] == ""){
+            if($deleteImg === "Supprimer" || $chapter_image == 0){
                 // echo "Delete or not img";
                 
                 $newSrc = "1";
@@ -154,7 +156,7 @@ use P5\Gestion\CheckFile;
                         }
                 }else{
                     $informationChapter["info_img"] = $testFile;
-                    $echecAddChapter = $this->addChapter($informationChapter);
+                    $echecAddChapter = $this->updateChapter($informationChapter);
                 
                 }
             }
