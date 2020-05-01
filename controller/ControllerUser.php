@@ -1,6 +1,7 @@
 <?php
 namespace P5\Controller;
 use P5\Model\ManagementUser;
+use P5\Gestion\Key; 
 
 class ControllerUser{
     private $_managementUser;
@@ -32,7 +33,8 @@ class ControllerUser{
                 }
                 $this->addUser($userInformation);
             }else{
-                $userRegister = $this->_managementUser->registerUser($first_name, $last_name, $pseudo, $mail, password_hash($password, PASSWORD_DEFAULT));
+                $key = hash("sha256", rand());
+                $userRegister = $this->_managementUser->registerUser($first_name, $last_name, $pseudo, $mail, password_hash($password, PASSWORD_DEFAULT), $key);
                 header('Location: /?type=user&action=forSinIn', true);
                 exit();
             }
@@ -65,7 +67,7 @@ class ControllerUser{
         header('Location: /?type=home&info=end');
     }
     public function forManageAccount($id){
-        if(is_string($id)){
+        if(!is_array($id)){
             $reqInformations = $this->_managementUser->takeInformationWithId($id);
             $userInformation = $reqInformations->fetch();
             require('view/viewManageAccount.php');
@@ -75,36 +77,47 @@ class ControllerUser{
             require('view/viewManageAccount.php');
         }
     }
-    public function manageAccount($first_name, $last_name, $pseudo, $mail){
+    public function manageAccount($first_name, $last_name, $pseudo, $mail, $generateKey){
         $tabUserInformation = [
             'first_name'=> $first_name,
             'last_name'=> $last_name,
             'pseudo'=> $pseudo,
             'mail'=>$mail
         ];
-        $tryPseudo = $this->_managementUser->tryMail($mail);
-        $tryMail = $this->_managementUser->tryPseudo($pseudo);
-        $testPseudo = $tryPseudo->rowCount();
-        $testMail = $tryMail->rowCount();
-        $resultMail = $tryMail->fetch();
-        $resultPseudo = $tryPseudo->fetch();
-        if( ($testPseudo == 0 || $pseudo === $_SESSION['pseudo']) && ($testMail == 0 || $mail === $_SESSION['mail'])){
-            $this->_managementUser->updateAllUserInformation($first_name, $last_name, $pseudo, $mail);
-            $_SESSION['mail'] = $mail;
-            $_SESSION['pseudo'] = $pseudo;
-            $_SESSION['first_name'] = $first_name;
-            $_SESSION['last_name'] = $last_name;
-            header('Location: /?type=chapter&action=chapterList');
-        }elseif ($testMail !== 0 || $testPseudo !== 0){
-            if($testPseudo !== 0 && $pseudo !== $_SESSION["pseudo"]){
-                unset($tabUserInformation["pseudo"]);
+
+        if($generateKey === 1): 
+            $key = hash("sha256", rand());
+            $newKey = $this->_managementUser->newKey($key);
+            $this->forManageAccount($_SESSION['idUser']);
+            
+        else:
+            $tryPseudo = $this->_managementUser->tryMail($mail);
+            $tryMail = $this->_managementUser->tryPseudo($pseudo);
+            $testPseudo = $tryPseudo->rowCount();
+            $testMail = $tryMail->rowCount();
+            $resultMail = $tryMail->fetch();
+            $resultPseudo = $tryPseudo->fetch();
+            if( ($testPseudo == 0 || $pseudo === $_SESSION['pseudo']) && ($testMail == 0 || $mail === $_SESSION['mail'])){
+                $this->_managementUser->updateAllUserInformation($first_name, $last_name, $pseudo, $mail);
+                $_SESSION['mail'] = $mail;
+                $_SESSION['pseudo'] = $pseudo;
+                $_SESSION['first_name'] = $first_name;
+                $_SESSION['last_name'] = $last_name;
+                header('Location: /?type=chapter&action=chapterList');
+            }elseif ($testMail !== 0 || $testPseudo !== 0){
+                if($testPseudo !== 0 && $pseudo !== $_SESSION["pseudo"]){
+                    unset($tabUserInformation["pseudo"]);
+                }
+                if($testMail !== 0 && $mail !== $_SESSION["mail"]){
+                    unset($tabUserInformation["mail"]);
+                }
+                $this->_managementUser->updateNamesUser($first_name, $last_name);
+                $this->forManageAccount($tabUserInformation);
             }
-            if($testMail !== 0 && $mail !== $_SESSION["mail"]){
-                unset($tabUserInformation["mail"]);
-            }
-            $this->_managementUser->updateNamesUser($first_name, $last_name);
-            $this->forManageAccount($tabUserInformation);
-        }
+        endif;
+         
+        
+        
     }
     public function forUpdatePassword(){
         require('view/viewUpdatePassword.php');

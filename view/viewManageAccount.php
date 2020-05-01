@@ -77,6 +77,21 @@ ob_start();
                     <small id="emailHelp" class="form-text text-muted">Nous ne partagerons jamais votre e-mail !</small>
                 </div>
 
+                <div class="form-group">
+                    <label for="keyApi">Key Api : </label>
+                    <div class ="row justify-content-between">
+                    
+                        <div class="col-lg-8">
+                        <input type="text" disabled="disabled" class="form-control" value="<?= $userInformation['key_api']?>"> 
+                        </div>
+
+                        <div class="col-lg-3 pr-0">
+                            <input type="submit" value="Générer une nouvelle clé" name="generateKey" class="btn btn-primary">
+                        </div>
+
+                    </div>
+                </div>
+
                 <button type="submit" class="btn btn-primary">Envoyer</button>
             </form>
 

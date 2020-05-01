@@ -19,8 +19,8 @@ class ManagementUser extends ManagementBDD{
         $reqPass->execute(array('pseudo'=> $pseudo));
         return $reqPass;
     }
-    public function registerUser($first_name, $last_name, $pseudo, $mail, $pass_hash){
-        $registerUser = $this->_bd->prepare('INSERT INTO users(pseudo, mail, admin, pass_hash, first_name, last_name, registration_date) VALUES( :pseudo, :mail, :admin, :pass_hash, :first_name, :last_name, NOW())');
+    public function registerUser($first_name, $last_name, $pseudo, $mail, $pass_hash, $key){
+        $registerUser = $this->_bd->prepare('INSERT INTO users(pseudo, mail, admin, pass_hash, first_name, last_name, registration_date, key_api) VALUES( :pseudo, :mail, :admin, :pass_hash, :first_name, :last_name, :registration_date, :key_api)');
         $registerUser->execute(array(
            'pseudo' => $pseudo,
            'mail' => $mail,
@@ -28,7 +28,10 @@ class ManagementUser extends ManagementBDD{
            'pass_hash' => $pass_hash,
            'first_name' => $first_name,
            'last_name' => $last_name,
+           'registration_date' => date('Y-m-d H:i:s'),
+           'key_api' => $key
         ));
+        return $registerUser;
     }
     public function takeInformationWithId($id){
         $userInfo = $this->_bd->prepare('SELECT * FROM users WHERE id = :id');
@@ -57,6 +60,14 @@ class ManagementUser extends ManagementBDD{
         $newPassword = $this->_bd->prepare('UPDATE users SET pass_hash = :pass_hash WHERE id = :id');
         $newPassword->execute(array(
             'pass_hash'=>$pass_hash,
+            'id'=>$_SESSION['idUser']
+        ));
+    }
+
+    public function newKey($key){
+        $newKey = $this->_bd->prepare('UPDATE users SET key_api = :key_api WHERE id = :id');
+        $newKey->execute(array(
+            'key_api'=>$key,
             'id'=>$_SESSION['idUser']
         ));
     }

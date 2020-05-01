@@ -128,7 +128,12 @@ try {
                     $controllerUser->forManageAccount($_SESSION['idUser']);
                 }
                 elseif($_GET['action'] === "manageAccount"){
-                    $controllerUser->manageAccount(htmlspecialchars($_POST['first_name']),htmlspecialchars($_POST['last_name']), htmlspecialchars($_POST['user_pseudo']),htmlspecialchars($_POST['user_mail']));
+                    if(isset($_POST['generateKey'])):
+                        $generateKey = 1;
+                    else:
+                        $generateKey = 0;
+                    endif;
+                    $controllerUser->manageAccount(htmlspecialchars($_POST['first_name']),htmlspecialchars($_POST['last_name']), htmlspecialchars($_POST['user_pseudo']),htmlspecialchars($_POST['user_mail']), $generateKey);
                 }
                 elseif($_GET['action'] === "forUpdatePassword"){
                     $controllerUser->forUpdatePassword();

@@ -15,7 +15,7 @@ class ControleApi{
             this.rate = document.getElementById('rate').value;
             this.duration = document.getElementById('duration').value;
     
-            ajaxGet("http://api?capital="+ this.capital +"&rate="+ this.rate +"&duration="+ this.duration, (reponse)=>{
+            ajaxGet("http://api/?duration="+this.duration+"&rate="+this.rate+"&capital="+this.capital+"&key=b2fa802ab172f1bece4b3ebd15bc502d2257ee0ace6fcf94ae3295daf9b561b1", (reponse)=>{
                 this.idFortab.textContent = "";
                 this.displayInformation(reponse);
             });
