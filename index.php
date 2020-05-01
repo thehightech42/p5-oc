@@ -133,7 +133,7 @@ try {
                     else:
                         $generateKey = 0;
                     endif;
-                    $controllerUser->manageAccount(htmlspecialchars($_POST['first_name']),htmlspecialchars($_POST['last_name']), htmlspecialchars($_POST['user_pseudo']),htmlspecialchars($_POST['user_mail']), $generateKey);
+                    $controllerUser->manageAccount(htmlspecialchars($_POST['first_name']),htmlspecialchars($_POST['last_name']), htmlspecialchars($_POST['user_pseudo']),htmlspecialchars($_POST['user_mail']), $_POST['key_api'], $generateKey);
                 }
                 elseif($_GET['action'] === "forUpdatePassword"){
                     $controllerUser->forUpdatePassword();

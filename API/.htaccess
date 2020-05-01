@@ -1,4 +1,3 @@
-<IfModule mod_headers.c>
-    Header set Access-Control-Allow-Origin: http://projet5
-    
-</IfModule>
+RewriteEngine On
+RewriteCond %{SERVER_PORT} !=443
+RewriteRule ^(.*)$ https://apicredit.antoninpfistner.fr/index.php [R=301,L]

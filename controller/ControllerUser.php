@@ -77,12 +77,13 @@ class ControllerUser{
             require('view/viewManageAccount.php');
         }
     }
-    public function manageAccount($first_name, $last_name, $pseudo, $mail, $generateKey){
+    public function manageAccount($first_name, $last_name, $pseudo, $mail, $apiKey, $generateKey){
         $tabUserInformation = [
             'first_name'=> $first_name,
             'last_name'=> $last_name,
             'pseudo'=> $pseudo,
-            'mail'=>$mail
+            'mail'=>$mail,
+            'key_api'=>$apiKey
         ];
 
         if($generateKey === 1): 

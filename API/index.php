@@ -75,7 +75,7 @@ function amortizationTable($mensualite){
 
 function tryIdentityClient(string $key){
     try{
-        require('env.php');
+        require('envAPI.php');
         $bd = new \PDO('mysql:host='.$domaineBDD.';dbname='.$BDDName.';charset=utf8', ''.$username.'', ''.$password.'');
     }catch (\Exception $e){
         return ('Erreur de connexion à la BDD, merci de contacter l\'administrateur ou de vous reconnecter plus tard.');

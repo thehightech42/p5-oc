@@ -15,7 +15,7 @@ class ControleApi{
             this.rate = document.getElementById('rate').value;
             this.duration = document.getElementById('duration').value;
     
-            ajaxGet("http://api/?duration="+this.duration+"&rate="+this.rate+"&capital="+this.capital+"&key=b2fa802ab172f1bece4b3ebd15bc502d2257ee0ace6fcf94ae3295daf9b561b1", (reponse)=>{
+            ajaxGet("https://apicredit.antoninpfistner.fr/?duration="+this.duration+"&rate="+this.rate+"&capital="+this.capital+"&key=f2d3f427f100e9f0240b61405faae62d106d41c478a05c603f8708834605e7f2", (reponse)=>{
                 this.idFortab.textContent = "";
                 this.displayInformation(reponse);
             });

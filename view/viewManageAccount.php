@@ -82,7 +82,7 @@ ob_start();
                     <div class ="row justify-content-between">
                     
                         <div class="col-lg-8">
-                        <input type="text" disabled="disabled" class="form-control" value="<?= $userInformation['key_api']?>"> 
+                        <input type="text" readonly class="form-control" name="key_api" value="<?= $userInformation['key_api']?>"> 
                         </div>
 
                         <div class="col-lg-3 pr-0">
