@@ -50,7 +50,7 @@ ob_start();
     <script src="js/ajax.js"></script>
     <script src="js/ControleApi.js"></script>
     <script>
-        let apicredit = new ControleApi('formApi', 'divFortab');
+        let apicredit = new ControleApi('formApi', 'divFortab', 'f2d3f427f100e9f0240b61405faae62d106d41c478a05c603f8708834605e7f2', true);
     </script>
 
 <?php

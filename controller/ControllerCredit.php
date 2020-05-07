@@ -10,4 +10,8 @@ class ControllerCredit{
         require('view/viewTryApi.php'); 
     }
 
+    public function documentation(){
+        require('view/viewDocumentation.php');
     }
+
+}

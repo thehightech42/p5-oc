@@ -157,6 +157,8 @@ try {
                     $controllerCredit->amortizationTable();
                 }elseif($_GET['action'] === "api"){
                     $controllerCredit->testApi();
+                }elseif($_GET['action'] === "documentation"){
+                    $controllerCredit->documentation();
                 }
             }
             elseif($_GET['type'] === "test" && $_GET['action'] === "hash"){

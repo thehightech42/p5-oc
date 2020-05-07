@@ -8,7 +8,7 @@ ob_start();
     </div>
 
     <div class="container-fluid m-0 p-0" id="viewSmartphoneHome">
-        <img src="img/Alaska-Smartphone.jpg" alt="Image de l'Alaska" class="img-Alaska-Smartphone">
+        <img src="img/Ampoule.jpg" alt="Photographie d'une ampoule" class="img-Ampoule-Smartphone">
         <div class="centered"><h1>Antonin Pfistner</h1></div>
     </div>
 <?php

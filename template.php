@@ -53,7 +53,7 @@ require('env.php')
 
             <?php
 
-        }elseif($_GET['type'] === 'administration' || $_GET['type'] === "credit"){
+        }elseif($_GET['type'] === 'administration' ){
             ?>
             <div class="row m-0 mb-5 screen">
                 <div class="col-lg-11 mx-auto">

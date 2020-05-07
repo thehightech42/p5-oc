@@ -87,12 +87,15 @@ td{
 .clearboth{
     clear: both;
 }
+.img-Ampoule-Smartphone{
+    width : 100%;
+}
 
 @media screen and (max-width: 640px) {
     .img-Alaska {
         display:none;
     }
-    bloc-total-admin{
+    .bloc-total-admin{
         flex-direction: column;
     }
     .bloc-Top-Admin{
@@ -122,6 +125,7 @@ td{
     #viewSmartphoneHome{
         display: block;
         overflow: hidden;
+        width : 100%;
     }
     
     .smart{

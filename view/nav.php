@@ -13,12 +13,16 @@ require('env.php')
             <li class="nav-item pr-2">
                 <a class="nav-link text-white" href="/?type=chapter&action=chapterList">Articles</a>
             </li>
-            <li class="nav-item pr-2">
-                <a class="nav-link text-white" href="/?type=credit&action=amortizationTable">Générer un tableau </br> d'amortissement</a>
-            </li>
-            <li class="nav-item pr-2">
-                <a class="nav-link text-white" href="/?type=credit&action=api">API</a>
-            </li>
+            <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <?= "API & class JS" ?>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/?type=credit&action=documentation">Documentation</a>
+                        <a class="dropdown-item" href="/?type=credit&action=api">Tester l'API</a>
+                        <a class="dropdown-item" href="/?type=credit&action=amortizationTable">Tableau d'amortissement </br> en JS</a>
+                    </div>
+                </li>
             <li class="nav-item pr-2">
                 <a class="nav-link text-white" href="/?type=user&action=forContact">Contact</a>
             </li>

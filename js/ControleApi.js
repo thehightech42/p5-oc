@@ -1,7 +1,16 @@
 class ControleApi{
-   constructor(idForm, idFortab){
+    /**
+     * Information of params
+     * @param {*} idForm  id of form where you get the credit information.
+     * @param {*} idFortab id of div where would you like generate the tab.
+     * @param {*} key key for use the api
+     * @param {*} tab bool for indicate if you would like generate or not the amortization tab directle after the request.
+     * For display monthly payment and cost of credit, place span on you page with id "mensualite" for montly payment and with id "creditCost" for cost of credit.
+     */
+   constructor(idForm, idFortab, key, tab){
         this.idForm = document.getElementById(idForm);
         this.idFortab = document.getElementById(idFortab);
+        this.key = key;
 
         this.capital = 0;
         this.rate = 0;
@@ -15,19 +24,21 @@ class ControleApi{
             this.rate = document.getElementById('rate').value;
             this.duration = document.getElementById('duration').value;
     
-            ajaxGet("https://apicredit.antoninpfistner.fr/?duration="+this.duration+"&rate="+this.rate+"&capital="+this.capital+"&key=f2d3f427f100e9f0240b61405faae62d106d41c478a05c603f8708834605e7f2", (reponse)=>{
+            ajaxGet("https://apicredit.antoninpfistner.fr/?duration="+this.duration+"&rate="+this.rate+"&capital="+this.capital+"&key="+this.key, (reponse)=>{
                 this.idFortab.textContent = "";
-                this.displayInformation(reponse);
+                let response = JSON.parse(reponse);
+                this.displayInformation(response);
+                if(tab === true){
+                    this.generateTab(response);
+                }
             });
         });
     }
 
-    displayInformation(reponses){
-        let reponse = JSON.parse(reponses);
+    displayInformation(reponse){
         console.log(reponse);
         document.getElementById('mensualite').textContent = reponse.resultat['mensualite'];
         document.getElementById('creditCost').textContent = reponse.resultat['creditCost'];
-        this.generateTab(reponse);
     }
 
     generateTab(reponse){
