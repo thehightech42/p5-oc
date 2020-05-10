@@ -65,14 +65,17 @@ try {
                         $controller_chapter->forUpdateChapter($_GET['idChapter']);
                     }
                     elseif($_GET['action'] === "updateChapter"){
-                        // var_dump($_FILES['chapter_image']);
                         if((!isset($_FILES['chapter_image']) )|| ($_FILES['chapter_image']['name'] == "")): 
                             $file = 0; 
                         else: 
                             $file = $_FILES['chapter_image'];
                         endif;
-
-                        $controller_chapter->updateChapter($_GET['idChapter'], htmlspecialchars($_POST['chapter_name']), htmlspecialchars($_POST['chapter_number']), $_POST['chapter_content'], $file, $_POST['deleteImg'] = 0);
+                    if(isset($_POST['deleteImg'])):
+                        $deleteImg = "Supprimer";
+                    else:
+                        $deleteImg = 0;
+                    endif; 
+                        $controller_chapter->updateChapter($_GET['idChapter'], htmlspecialchars($_POST['chapter_name']), htmlspecialchars($_POST['chapter_number']), $_POST['chapter_content'], $file, $deleteImg);
                         // var_dump($_POST);
                     }
                     elseif($_GET['action'] === "deleteChapter"){

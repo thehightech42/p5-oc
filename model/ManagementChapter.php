@@ -117,4 +117,10 @@ class ManagementChapter extends ManagementBDD{
         $nb = $this->_bd->query("SELECT COUNT(id) FROM chapters")->fetch(\PDO::FETCH_NUM)[0];
         return $nb;
     }
+
+    public function srcImg($id){
+        $srcImg = $this->_bd->prepare('SELECT src_img FROM chapters WHERE id = :id'); 
+        $srcImg->execute(array('id' => $id));
+        return $srcImg->fetch();
+    }
 }

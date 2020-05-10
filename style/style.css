@@ -90,6 +90,9 @@ td{
 .img-Ampoule-Smartphone{
     width : 100%;
 }
+.inline{
+    display: inline;
+}
 
 @media screen and (max-width: 640px) {
     .img-Alaska {

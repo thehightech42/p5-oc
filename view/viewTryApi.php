@@ -13,7 +13,10 @@ ob_start();
 
             <div class="form-group">
                 <label for="rate">Taux d'intérêt :</label>
-                <p><input type="number" class="form-control" id="rate" placeholder="Entrer le taux d'intérêt" min="0.5" max="5" step="0.01"> <span> %</span></p>
+                <div class="inline">
+                    <input type="number" class="form-control" id="rate" placeholder="Entrer le taux d'intérêt" min="0.5" max="5" step="0.01"><span>%</span>
+                </div>
+                
             </div>
 
             <div class="form-group">

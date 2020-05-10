@@ -122,10 +122,10 @@ use P5\Gestion\CheckFile;
             }
 
             if($deleteImg === "Supprimer" || $chapter_image == 0){
-                // echo "Delete or not img";
-                
+                $src = $this->_managementChapter->srcImg($id); 
                 $newSrc = "1";
                 if($deleteImg === "Supprimer"){
+                    unlink($src['src_img']);
                     $deleteImg = $this->_managementChapter->deleteImg($id, $chapter_name, $chapter_number, $chapter_content, $newSrc);
                     $this->forUpdateChapter($id);
                 }else{
@@ -135,8 +135,6 @@ use P5\Gestion\CheckFile;
                 }   
                 
             }else{
-                // echo "Add img";
-
                 $checkFile = new CheckFile(".jpg,.jpeg,.png,.gif", 5000000, $chapter_image);
                 $testFile = $checkFile->check();
                 

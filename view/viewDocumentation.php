@@ -27,7 +27,7 @@ ob_start();
             <img src="img/KeyFalseApi.png" alt="Image de la réponse JSON, en cas de clé erroné." class="w-100">
         </div>
         <div class="col-lg-6">
-            <p>Si vous ne possédez pas de compte ou que votre clé est mauvaise, l'API vous renverra le message ci joint.</p>
+            <p class="text-justify">Si vous ne possédez pas de compte ou que votre clé est mauvaise, l'API vous renverra le message ci joint.</p>
         </div>
     </div>
 
@@ -36,7 +36,7 @@ ob_start();
     <h5 class="mb-3">Paramètre manquant :</h5>
     <div class="row justify-content-between mb-4">
         <div class="col-lg-6">
-            <p>Dans le cadre de manque d’informations, l’API vous informera quelle information manque. Dans la cadre ci-dessus, le taux n’a pas été fourni.</p>
+            <p class="text-justify">Dans le cadre de manque d’informations, l’API vous informera quelle information manque. Dans la cadre ci-dessus, le taux n’a pas été fourni.</p>
             <img src="img/JSONElementMissing" alt="JSON en cas de paramètre manquant.">
         </div>
         <div class="col-lg-5">
@@ -52,7 +52,9 @@ ob_start();
             <img src="img/RequetteConforme.png" alt="JSON suite à une requette conforme" class="w-75">
         </div>
         <div class="col-lg-6">
-            <p>On retrouve la mensualité, le coût du crédit et pour finir, un tableau multi-dimensionnel avec dans lequel se trouve le tableau d’amortissement. La longueur de ce dernier dépendra de fait de la durée en mois du crédit. </p>
+            <p class="text-justify">On retrouve la mensualité, le coût du crédit et pour finir, un tableau multi-dimensionnel avec dans lequel se trouve le tableau d’amortissement. La longueur de ce dernier dépendra de fait de la durée en mois du crédit. </p>
+            <p class="text-justify">Url type pour une requette = " <span class="font-weight-bold">http://apicredit.antoninpfistner.fr?duration=######&capital=######&rate=######&key=######</span>  "</p>
+            <p class="text-justify">Il ne vous reste plus que à remplacer " ###### " par les information sur le crédit souhaité ainsi que votre key. </p>
         </div>
     </div>
         
