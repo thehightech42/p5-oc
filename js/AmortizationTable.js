@@ -22,10 +22,6 @@ class AmortizationTable{
         this.idBlockForm.appendChild(title);
         form.setAttribute('id', idFormulaire ); 
 
-        //Style du formulaire
-        form.style.display="flex"; 
-        form.style.justifyContent = "space-between";
-
         let blocCapital= this.createBlocElementForm('blocCapital', 'false', 'capital', 'Montant à emprunter : ', 'number', 10000);
         let blocRate = this.createBlocElementForm('blocRate', 'false', 'rate', 'Taux d\'intérêt : ', 'number', 0.5, 5, 0.01);
         let blocDuration = this.createBlocElementForm('blocDuration', 'false', 'duration', 'Durée de l\'emprunt : ', 'select', 2);
@@ -41,6 +37,15 @@ class AmortizationTable{
 
         this.idBlockForm.appendChild(form);
         
+        //Style du formulaire
+        form.style.display="flex";
+        if(window.matchMedia("(min-width: 640px)").matches){
+            form.style.flexDirection = "row";
+            form.style.justifyContent = "space-between";
+        }else{
+            form.style.flexDirection = "column";
+            form.style.justifyContent = "space-between";
+        }
     }
    /**
     * Methode qui crée des bloc du champs de formulaire
@@ -184,6 +189,9 @@ class AmortizationTable{
         }
     }
 
+    /**
+     * Cette méthode calcul la mensualité, le cout du crédit et les affaiches. 
+     */
     calculation(){
         let durationMonth = this.duration *12; 
         console.log("Le montant emprunté est de " + this.capital + "€ sur une durée de " + durationMonth + " mois à un taux de " + this.rate +"% !" );

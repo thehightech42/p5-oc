@@ -93,6 +93,9 @@ td{
 .inline{
     display: inline;
 }
+#urlScroll{
+    overflow: scroll;
+}
 
 @media screen and (max-width: 640px) {
     .img-Alaska {
@@ -130,6 +133,7 @@ td{
         overflow: hidden;
         width : 100%;
     }
+    
     
     .smart{
         display: none;

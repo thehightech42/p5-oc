@@ -53,7 +53,8 @@ ob_start();
         </div>
         <div class="col-lg-6">
             <p class="text-justify">On retrouve la mensualité, le coût du crédit et pour finir, un tableau multi-dimensionnel avec dans lequel se trouve le tableau d’amortissement. La longueur de ce dernier dépendra de fait de la durée en mois du crédit. </p>
-            <p class="text-justify">Url type pour une requette = " <span class="font-weight-bold">http://apicredit.antoninpfistner.fr?duration=######&capital=######&rate=######&key=######</span>  "</p>
+            <h6>Url type pour une requette : </h6>
+            <p id="urlScroll" class="font-weight-bold"> http://apicredit.antoninpfistner.fr?duration=######&capital=######&rate=######&key=######"</p>
             <p class="text-justify">Il ne vous reste plus que à remplacer " ###### " par les information sur le crédit souhaité ainsi que votre key. </p>
         </div>
     </div>
