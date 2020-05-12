@@ -1,5 +1,5 @@
 <?php
-$titlePage = "Documentation";
+$titlePage = "Documentation de l'API";
 
 ob_start(); 
 ?>

@@ -2,7 +2,7 @@
 use P5\Gestion\Gestion;
 ob_start();
 
-$titlePage = "Listes des articles";
+$titlePage = "Articles";
 
 //require_once('gestion/Gestion.php');
 $gestion = new Gestion;

@@ -1,5 +1,5 @@
 <?php
-$titlePage = "Billet simple pour l'Alaska";
+$titlePage = "Antonin PFISTNER";
 ob_start();
 ?>
     <div class="container-fluid m-0 p-0" id="viewComputerHome">
