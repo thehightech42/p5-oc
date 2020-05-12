@@ -2,41 +2,47 @@
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
 
-$connexionBDD = tryIdentityClient($_GET['key']);
-$arrayJson = [];
+if(isset($_GET['key'])){
+    $connexionBDD = tryIdentityClient($_GET['key']);
+    $arrayJson = [];
 
-if(is_string($connexionBDD)){
-    contentJson(false, $connexionBDD);
-}
-elseif($connexionBDD === false){
-    contentJson(false, "Merci de vous créer un compte pour utiliser l'API.");
-}
-else{
-
-    if(isset($_GET['capital']) && isset($_GET['rate']) && isset($_GET['duration']) ){
-        $durationMonth = $_GET['duration'] * 12; 
-        $rate = $_GET['rate']/100;
-        $mensualite = ($_GET['capital'] * ($rate/12)) / (1 - pow( (1+($rate/12)), -$durationMonth ));
-        $capitalStay = intval($_GET['capital']); 
-    
-        $resultat = []; 
-        $resultat['mensualite'] = round($mensualite, 2); 
-        $resultat['creditCost'] = round(($mensualite*$durationMonth) - $_GET['capital'], 2);
-        $resultat['table'] = amortizationTable($mensualite);
-    
-        contentJson(true, "Tous les informations sont conformes", $resultat);
-    
-    }else{
-        $resultat =  [];
-        $resultat['capital'] = isset($_GET['capital']); 
-        $resultat['rate'] = isset($_GET['rate']);
-        $resultat['duration'] = isset($_GET['duration']);
-        
-    
-        contentJson(false, "Il manque des données", $resultat);
+    if(is_string($connexionBDD)){
+        contentJson(false, $connexionBDD);
     }
+    elseif($connexionBDD === false){
+        contentJson(false, "Merci de vous créer un compte pour utiliser l'API.");
+    }
+    else{
 
+        if(isset($_GET['capital']) && isset($_GET['rate']) && isset($_GET['duration']) ){
+            $durationMonth = $_GET['duration'] * 12; 
+            $rate = $_GET['rate']/100;
+            $mensualite = ($_GET['capital'] * ($rate/12)) / (1 - pow( (1+($rate/12)), -$durationMonth ));
+            $capitalStay = intval($_GET['capital']); 
+        
+            $resultat = []; 
+            $resultat['mensualite'] = round($mensualite, 2); 
+            $resultat['creditCost'] = round(($mensualite*$durationMonth) - $_GET['capital'], 2);
+            $resultat['table'] = amortizationTable($mensualite);
+        
+            contentJson(true, "Tous les informations sont conformes", $resultat);
+        
+        }else{
+            $resultat =  [];
+            $resultat['capital'] = isset($_GET['capital']); 
+            $resultat['rate'] = isset($_GET['rate']);
+            $resultat['duration'] = isset($_GET['duration']);
+            
+        
+            contentJson(false, "Il manque des données", $resultat);
+        }
+
+    }
+}else{
+    contentJson(false, "Merci d'ajouter une clé dans à votre requette. Pour en avoir une crée vous un compte sur https://p5.antoninpfistner.fr");
 }
+
+
 
 
 function contentJson(bool $success, string $msg, array $resultat = null){
