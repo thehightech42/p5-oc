@@ -148,12 +148,13 @@ class ControllerUser{
         $entete .= 'Content-type: text/html; charset=utf-8' . "\r\n";
         $entete .= 'From: ' . $mail . "\r\n";
 
-        $message = '<h4>Message du site " Billet simple pour l\'Alaska ”</h4>
+        $message = '<h4>Message du site "Antonin PFISTNER”</h4>
         <p><b>Nom : </b>' . $name . '<br>
         <b>Email : </b>' . $mail . '<br>
         <b>Message : </b>' . $message . '</p>';
+        
 
-        $retour = mail('antonin.pfistner@gmail.com', $subject, $message, $entete);
+        $retour = mail('contact@antoninpfistner.fr', $subject, $message, $entete);
         if($retour) {
             $this->forContact("Votre message a bien été envoyé.");
         }else{
