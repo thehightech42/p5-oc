@@ -26,6 +26,9 @@ use P5\Router\Router;
 // Autoloader::register();
 
 try {
+    // var_dump($_GET);
+    // var_dump($_SERVER);
+
         if(isset($_GET['type']) && isset($_GET['action'])){
             if($_GET['type'] === "chapter"){
                 if(isset($_GET['idComment']) || isset($_GET['idChapter'])){
@@ -179,12 +182,15 @@ try {
             $controller_chapter = new ControllerChapter;
             $controller_chapter->administrationPage();
         }
-        else{
+        elseif( !isset($_GET['type']) && !isset($_GET['action']) ){
             require('view/viewHome.php');
+            // throw new \Exception("Page not found !", 404);
 
+        }else{
+            throw new \Exception("Page not found !", 404);
         }
 }
 catch(Exception $e) {
-    die ('Erreur : ' . $e->getMessage());
-
+    // die ('Erreur : ' . $e->getMessage());
+    require("view/viewError.php"); 
 }
