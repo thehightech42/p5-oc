@@ -6,7 +6,7 @@ require('env.php')
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand pr-5" href="/">Antonin</br>PFISTNER</a>
+    <a class="navbar-brand pr-5" href="/">Antonin<br>PFISTNER</a>
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav mr-auto">
@@ -20,7 +20,7 @@ require('env.php')
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/?type=credit&action=documentation">Documentation</a>
                         <a class="dropdown-item" href="/?type=credit&action=api">Tester l'API</a>
-                        <a class="dropdown-item" href="/?type=credit&action=amortizationTable">Tableau d'amortissement </br> en JS</a>
+                        <a class="dropdown-item" href="/?type=credit&action=amortizationTable">Tableau d'amortissement <br> en JS</a>
                     </div>
                 </li>
             <li class="nav-item pr-2">
@@ -31,7 +31,7 @@ require('env.php')
                 if(isset($_SESSION['admin']) && $_SESSION['admin'] === "1"){
                     ?>
                     <li class="nav-item">
-                        <a class="nav-link text-white pr-2" href="/?type=administration">Administration</br>des articles</a>
+                        <a class="nav-link text-white pr-2" href="/?type=administration">Administration<br>des articles</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white pr-2" href="/?type=chapter&action=forAddChapter">Ajouter un article</a>
