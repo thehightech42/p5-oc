@@ -16,7 +16,7 @@ $script = ob_get_clean();
 $titlePage = "Ajout d'un chapitre";
 
 ob_start();
-if($_GET['action'] === 'forUpdateChapter'){
+if(($_GET['action'] === 'forUpdateChapter') || $uptade = true ){
     ?>
     <h4>Mise à jour de article</h4>
     <?php
@@ -36,7 +36,7 @@ if($_GET['action'] === 'forUpdateChapter'){
 
     <form enctype="multipart/form-data"
         <?php
-        if(isset($_GET['type']) && isset($_GET['action']) && $_GET['action'] == "forUpdateChapter"){
+        if( (isset($_GET['type']) && isset($_GET['action']) && $_GET['action'] == "forUpdateChapter") || $uptade = true ){
             ?>
             action="/?type=chapter&action=updateChapter&idChapter=<?=$_GET['idChapter']?>"
             <?php
