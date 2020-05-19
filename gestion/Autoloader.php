@@ -27,5 +27,3 @@ class Autoloader{
        }
    }
 }
-
-//   ' ..... \\ '               '/homepages/11/d711207066/htdocs/p4/....'

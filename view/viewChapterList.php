@@ -4,7 +4,6 @@ ob_start();
 
 $titlePage = "Articles";
 
-//require_once('gestion/Gestion.php');
 $gestion = new Gestion;
 ?>
     <div class="container d-flex flex-column justify-content-between h-100">

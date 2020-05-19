@@ -74,7 +74,6 @@ class ManagementChapter extends ManagementBDD{
 
     public function addComment($id, $content){
         $addComment = $this->_bd->prepare('INSERT INTO comments(id_post, pseudo, content, status_of_comment, published_date) VALUES(:id_post, :pseudo, :content, :status_of_comment, NOW())');
-        //var_dump($id, $content, $_SESSION['pseudo'], $this->_bd);
         $addComment->execute(array(
             'id_post' => $id,
             'pseudo' => $_SESSION['pseudo'],

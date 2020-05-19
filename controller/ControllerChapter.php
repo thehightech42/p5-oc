@@ -107,8 +107,6 @@ use P5\Gestion\CheckFile;
         }
 
         public function updateChapter($id, $chapter_name, $chapter_number, $chapter_content, $chapter_image ,$deleteImg){
-            // echo $deleteImg."</br>";
-            // var_dump($src)."</br>";
             $informationChapter = [
                 "chapter_name"=>$chapter_name,
                 "chapter_number"=>$chapter_number,
@@ -119,7 +117,6 @@ use P5\Gestion\CheckFile;
             $numberChapterExist = $this->_managementChapter->tryNumberChapter($chapter_number);
             $exist = $numberChapterExist->rowCount();
             $reqId = $numberChapterExist->fetch();
-            // echo $reqId['id'];
             if($exist !== 0 && $reqId['id'] !== $id){
                 unset($informationChapter['chapter_number']);
                 $update = true;
@@ -144,7 +141,6 @@ use P5\Gestion\CheckFile;
                     $testFile = $checkFile->check();
                     
                     if($testFile === true){
-                        // echo "Test ok </br>";
                         $name = $checkFile->uniqueName();
                         $src = "img/img-article/".$name;
                         $displacement = move_uploaded_file($chapter_image['tmp_name'], $src);
@@ -152,7 +148,6 @@ use P5\Gestion\CheckFile;
                         if($displacement){
                             $updateChapter = $this->_managementChapter->updateChapter($id, $chapter_name, $chapter_number, $chapter_content, $src);
                             $newList = $this->chapterList();
-                            // echo "Déplacement </br>";
                             }else{
                                 $informationChapter["info_img"] ="Enregistrement du fichier impossible";
                                 $echecUpdateChapter = $this->addChapter($informationChapter);

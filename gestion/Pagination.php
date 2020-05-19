@@ -25,13 +25,12 @@ class Pagination
         $this->_nbPerPage = $nbPerPage;
         $this->_model = $model;
 
-        // $this->_bd = $this->AccesBDD();
         $this->nbElements(); 
         $this->nbPages($this->_nbElements, $this->_nbPerPage);
         $this->offset ($this->_currentPage,  $this->_nbPerPage);
         if($this->_currentPage > $this->_nbPages)
         {
-            throw new \Exception ("Erreur 404 - Page not found");
+            throw new \Exception ("Page not found", 404);
         }
 
     }
@@ -42,7 +41,6 @@ class Pagination
     private function nbPages($nbElements, $nbPerPage)
     {
         $this->_nbPages = ceil($nbElements / $nbPerPage);
-        //echo $this->_nbPages;
     }
 
     private function offset ($currentPage, $nbPerPage)

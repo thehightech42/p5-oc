@@ -9,25 +9,10 @@ use P5\Gestion\Gestion;
 use P5\Controller\ControllerCredit;
 use P5\Router\Router;
 
-// try{
-//     $router = new Router($_GET['url']);
-//     $router->get('/', function(){ require('view/viewHome.php'); });
-//     $router->get('/articles', "ControllerChapter;chapterList");
-//     $router->get('/article/:id', "ControllerChapter;chapterAndComments")->with('id', '[0-9]+');
-//     $router->get('/forContact', "ControllerUser;forContact");
-    
-//     $router->run();
-// }catch(Exception $e){
-//     die ('Erreur : ' . $e->getMessage());
-// }
-
-
-// require('gestion/Autoloader.php');
-// Autoloader::register();
 
 try {
-    // var_dump($_GET);
-    // var_dump($_SERVER);
+    preg_match($_SERVER['REQUEST_URI'], '/.*/', $matches);
+    var_dump($matches);
 
         if(isset($_GET['type']) && isset($_GET['action'])){
             if($_GET['type'] === "chapter"){
@@ -79,7 +64,6 @@ try {
                         $deleteImg = 0;
                     endif; 
                         $controller_chapter->updateChapter($_GET['idChapter'], htmlspecialchars($_POST['chapter_name']), htmlspecialchars($_POST['chapter_number']), $_POST['chapter_content'], $file, $deleteImg);
-                        // var_dump($_POST);
                     }
                     elseif($_GET['action'] === "deleteChapter"){
                         $controller_chapter->deleteChapter($_GET['idChapter']);
@@ -170,7 +154,7 @@ try {
             elseif($_GET['type'] === "test" && $_GET['action'] === "hash"){
                 require('view/hash.php');
             }
-            elseif($_GET['type'] === "home"){
+            elseif($_GET['type'] === "home" ){
                 require('view/viewHome.php');
             }
             else{
@@ -182,12 +166,14 @@ try {
             $controller_chapter = new ControllerChapter;
             $controller_chapter->administrationPage();
         }
-        elseif( !isset($_GET['type']) && !isset($_GET['action']) ){
+        elseif( $_SERVER['REQUEST_URI'] === "/" ){
             require('view/viewHome.php');
-            // throw new \Exception("Page not found !", 404);
-
-        }else{
-            throw new \Exception("Page not found !", 404);
+        }
+        elseif( preg_match($_SERVER['REQUEST_URI'], '/.*/', $matches) === 1 ){
+            throw new \Exception("Page not found ! ;p", 404);
+        }
+        else{
+            throw new \Exception("Page not found ! ;)", 404);
         }
 }
 catch(Exception $e) {

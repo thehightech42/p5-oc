@@ -8,7 +8,6 @@ class ManagementBDD {
     }
     protected function AccesBDD(){
         require('env.php');
-        //$bd = new \PDO('mysql:host='.$domaineBDD.';dbname='.$BDDName.';charset=utf8', ''.$username.'', ''.$password.'');
         try{
             $bd = new \PDO('mysql:host='.$domaineBDD.';dbname='.$BDDName.';charset=utf8', ''.$username.'', ''.$password.'');
         }catch (\Exception $e){
