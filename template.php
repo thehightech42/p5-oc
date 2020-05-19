@@ -8,22 +8,22 @@ require('env.php')
         <meta charset="utf-8"/>
         <title> <?= $titlePage; ?> </title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
+        
         <meta name="title" content="<?= $titlePage ?>"/>
-        <meta name="description" content="Billet simple pour l'Alaska - Un livre publié chapitre par chapitre en ligne."/>
-        <meta name="url" content="http://p4.antoninpfistner.fr"/>
-        <meta name="image" content="../img-car/Logo-JD.v1-Carre.png"/>
+        <meta name="description" content="Blog - Antonin PFISTNER | Développeur Full Stack"/>
+        <meta name="url" content="http://p5.antoninpfistner.fr"/>
+        <!-- <meta name="image" content="../img-car/Logo-JD.v1-Carre.png"/> -->
 
         <meta name="twitter:card" content="summary"/>
         <meta name="twitter:title" content="<?= $titlePage ?>"/>
-        <meta name="twitter:description" content="Billet simple pour l'Alaska - Un livre publié chapitre par chapitre en ligne."/>
-        <meta name="twitter:image" content="../img-car/Logo-JD.v1-Carre.png" />
+        <meta name="twitter:description" content="Blog - Antonin PFISTNER | Développeur Full Stack"/>
+        <!-- <meta name="twitter:image" content="../img-car/Logo-JD.v1-Carre.png" /> -->
 
         <meta property="og:title" content="<?= $titlePage ?>"/>
-        <meta property="og:description" content="Billet simple pour l'Alaska - Un livre publié chapitre par chapitre en ligne."/>
-        <meta property="og:type" content="Livre en ligne"/>
-        <meta property="og:url" content="http://p4.antoninpfistner.fr"/>
-        <meta property="og:image" content="../img-car/Logo-JD.v1-Carre.png"/>
+        <meta property="og:description" content="Blog - Antonin PFISTNER | Développeur Full Stack"/>
+        <meta property="og:type" content="Blog et API"/>
+        <meta property="og:url" content="http://p5.antoninpfistner.fr"/>
+        <!-- <meta property="og:image" content="../img-car/Logo-JD.v1-Carre.png"/> -->
 
         <!--CSS Bootstrap-->
         <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
