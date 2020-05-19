@@ -17,7 +17,6 @@ use P5\Gestion\CheckFile;
 
         public function chapterList($page = 1){
             $page = intval($page);
-            //$chapters = $this->_managementChapter->chapterLists();
             $pagination = new Pagination(3, $this->_managementChapter, $page);
             $chapters = $pagination->chaptersPagination();
             $navPage = $pagination->navPage();
@@ -40,57 +39,44 @@ use P5\Gestion\CheckFile;
         }
         public function addChapter($informationChapter = []){
             require('view/viewAddChapter.php');
+            $update = false;
         }
 
-        public function registerChapter($chapter_name, $chapter_number, $chapter_content, $chapter_image ){
+        public function registerChapter($chapter_name, $chapter_content, $chapter_image ){
             $informationChapter = [
                 "chapter_name"=>$chapter_name,
-                "chapter_number"=>$chapter_number,
                 "chapter_content"=>$chapter_content
             ];
 
-            $numberChapterExist = $this->_managementChapter->tryNumberChapter($chapter_number);
-            $exist = $numberChapterExist->rowCount();
+            if($chapter_image['name'] == ""):
+                $chapter_image = 1;
+            endif;
+            if($chapter_image !== 1){
+                $checkFile = new CheckFile(".jpg,.jpeg,.png,.gif", 5000000, $chapter_image);
+                $testFile = $checkFile->check();
+                
+                if($testFile === true){
+                    $name = $checkFile->uniqueName();
+                    $src = "img/img-article/".$name;
+                    $displacement = move_uploaded_file($chapter_image['tmp_name'], $src);
 
-            if($exist !== 0 ){
-                unset($informationChapter['chapter_number']);
-                $echecAddChapter = $this->addChapter($informationChapter);
-
-            }else{ 
-                if($chapter_image['name'] == ""):
-                    $chapter_image = 1;
-                endif;
-                if($chapter_image !== 1){
-                    // echo"Img</br>";
-                    $checkFile = new CheckFile(".jpg,.jpeg,.png,.gif", 5000000, $chapter_image);
-                    $testFile = $checkFile->check();
-                    
-                    if($testFile === true){
-                        // echo "Test ok </br>";
-                        $name = $checkFile->uniqueName();
-                        $src = "img/img-article/".$name;
-                        $displacement = move_uploaded_file($chapter_image['tmp_name'], $src);
-
-                        if($displacement){
-                            $registerChapter = $this->_managementChapter->registerChapter($chapter_name, $chapter_number, $chapter_content, $src);
-                            $newList = $this->chapterList();
-                            // echo "Déplacement </br>";
-                            }else{
-                                $informationChapter["info_img"] ="Enregistrement du fichier impossible";
-                                $echecAddChapter = $this->addChapter($informationChapter);
-                            }
+                    if($displacement){
+                        $registerChapter = $this->_managementChapter->registerChapter($chapter_name, $chapter_content, $src);
+                        $newList = $this->chapterList();
                         }else{
-                            $informationChapter["info_img"] = $testFile;
+                            $informationChapter["info_img"] ="Enregistrement du fichier impossible";
                             $echecAddChapter = $this->addChapter($informationChapter);
-
                         }
+                    }else{
+                        $informationChapter["info_img"] = $testFile;
+                        $echecAddChapter = $this->addChapter($informationChapter);
 
-                }else{
-                    $src = 1;
-                    $registerChapter = $this->_managementChapter->registerChapter($chapter_name, $chapter_number, $chapter_content, $src);
-                    $newListe = $this->chapterList();
-                }
+                    }
 
+            }else{
+                $src = 1;
+                $registerChapter = $this->_managementChapter->registerChapter($chapter_name, $chapter_content, $src);
+                $newListe = $this->chapterList();
             }
 
         }
@@ -106,57 +92,46 @@ use P5\Gestion\CheckFile;
             require('view/viewAddChapter.php');
         }
 
-        public function updateChapter($id, $chapter_name, $chapter_number, $chapter_content, $chapter_image ,$deleteImg){
+        public function updateChapter($id, $chapter_name, $chapter_content, $chapter_image ,$deleteImg){
             $informationChapter = [
                 "chapter_name"=>$chapter_name,
-                "chapter_number"=>$chapter_number,
                 "chapter_content"=>$chapter_content,
                 "chapter_image"=>$chapter_image
             ];
             
-            $numberChapterExist = $this->_managementChapter->tryNumberChapter($chapter_number);
-            $exist = $numberChapterExist->rowCount();
-            $reqId = $numberChapterExist->fetch();
-            if($exist !== 0 && $reqId['id'] !== $id){
-                unset($informationChapter['chapter_number']);
-                $update = true;
-                $echecAddChapter = $this->forUpdateChapter($informationChapter, $update);
-
-            }else{
-                if($deleteImg === "Supprimer" || $chapter_image == 0){
-                    $src = $this->_managementChapter->srcImg($id); 
-                    $newSrc = "1";
-                    if($deleteImg === "Supprimer"){
-                        unlink($src['src_img']);
-                        $deleteImg = $this->_managementChapter->deleteImg($id, $chapter_name, $chapter_number, $chapter_content, $newSrc);
-                        $this->forUpdateChapter($id);
-                    }else{
-                        $updateChapter = $this->_managementChapter->updateChapter($id, $chapter_name, $chapter_number, $chapter_content, $newSrc);
-                        $this->chapterList();
-    
-                    }   
-                    
+            if($deleteImg === "Supprimer" || $chapter_image == 0){
+                $src = $this->_managementChapter->srcImg($id); 
+                $newSrc = "1";
+                if($deleteImg === "Supprimer"){
+                    unlink($src['src_img']);
+                    $deleteImg = $this->_managementChapter->deleteImg($id, $chapter_name, $chapter_content, $newSrc);
+                    $this->forUpdateChapter($id);
                 }else{
-                    $checkFile = new CheckFile(".jpg,.jpeg,.png,.gif", 5000000, $chapter_image);
-                    $testFile = $checkFile->check();
-                    
-                    if($testFile === true){
-                        $name = $checkFile->uniqueName();
-                        $src = "img/img-article/".$name;
-                        $displacement = move_uploaded_file($chapter_image['tmp_name'], $src);
-                    
-                        if($displacement){
-                            $updateChapter = $this->_managementChapter->updateChapter($id, $chapter_name, $chapter_number, $chapter_content, $src);
-                            $newList = $this->chapterList();
-                            }else{
-                                $informationChapter["info_img"] ="Enregistrement du fichier impossible";
-                                $echecUpdateChapter = $this->addChapter($informationChapter);
-                            }
-                    }else{
-                        $informationChapter["info_img"] = $testFile;
-                        $echecAddChapter = $this->updateChapter($informationChapter);
-                    
-                    }
+                    $updateChapter = $this->_managementChapter->updateChapter($id, $chapter_name, $chapter_content, $newSrc);
+                    $this->chapterList();
+
+                }   
+                
+            }else{
+                $checkFile = new CheckFile(".jpg,.jpeg,.png,.gif", 5000000, $chapter_image);
+                $testFile = $checkFile->check();
+                
+                if($testFile === true){
+                    $name = $checkFile->uniqueName();
+                    $src = "img/img-article/".$name;
+                    $displacement = move_uploaded_file($chapter_image['tmp_name'], $src);
+                
+                    if($displacement){
+                        $updateChapter = $this->_managementChapter->updateChapter($id, $chapter_name, $chapter_content, $src);
+                        $newList = $this->chapterList();
+                        }else{
+                            $informationChapter["info_img"] ="Enregistrement du fichier impossible";
+                            $echecUpdateChapter = $this->addChapter($informationChapter);
+                        }
+                }else{
+                    $informationChapter["info_img"] = $testFile;
+                    $echecAddChapter = $this->updateChapter($informationChapter);
+                
                 }
             }
 
@@ -166,7 +141,7 @@ use P5\Gestion\CheckFile;
         public function deleteChapter($id){
             $deleteChapter = $this->_managementChapter->deleteChapter($id);
 
-            $this->chapterList(1);
+            header('Location: /?type=administration');
         }
 
         public function addComment($id, $content){

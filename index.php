@@ -44,7 +44,7 @@ try {
                     $controller_chapter->addChapter();
                 }
                 elseif($_GET['action'] === "addChapter"){
-                    $controller_chapter->registerChapter(htmlspecialchars($_POST['chapter_name']), htmlspecialchars($_POST['chapter_number']), $_POST['chapter_content'], $_FILES['chapter_image']);
+                    $controller_chapter->registerChapter(htmlspecialchars($_POST['chapter_name']),  $_POST['chapter_content'], $_FILES['chapter_image']);
                 }
                 elseif($_GET['action'] === "forUpdateChapter"){
                     $controller_chapter->forUpdateChapter($_GET['idChapter']);
@@ -60,7 +60,7 @@ try {
                 else:
                     $deleteImg = 0;
                 endif; 
-                    $controller_chapter->updateChapter($_GET['idChapter'], htmlspecialchars($_POST['chapter_name']), htmlspecialchars($_POST['chapter_number']), $_POST['chapter_content'], $file, $deleteImg);
+                    $controller_chapter->updateChapter($_GET['idChapter'], htmlspecialchars($_POST['chapter_name']),  $_POST['chapter_content'], $file, $deleteImg);
                 }
                 elseif($_GET['action'] === "deleteChapter"){
                     $controller_chapter->deleteChapter($_GET['idChapter']);

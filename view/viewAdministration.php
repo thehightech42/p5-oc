@@ -70,7 +70,7 @@ ob_start();
         ?>
         <div class="col-lg-8">
             <a href="/?type=chapter&action=chapter&idChapter=<?= $chapter['id']?>">
-                <h6>Chapitre <?= $chapter['chapter_number'] .' - '. $chapter['chapter_name']?></h6>
+                <h6><?=$chapter['chapter_name']?></h6>
             </a>
         </div>
 

@@ -13,7 +13,7 @@ class CheckFile
      * $maxSize = Size max for the file : number in octet .
      * This array of the file.
      */
-    function __construct(string $type, nummber $maxSize, $file)
+    function __construct(string $type, int $maxSize, $file)
     {
         if(!$file['error'] === 0)
         {

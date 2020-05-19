@@ -16,33 +16,34 @@ $script = ob_get_clean();
 $titlePage = "Ajout d'un chapitre";
 
 ob_start();
-if(($_GET['action'] === 'forUpdateChapter') || $uptade = true ){
-    ?>
-    <h4>Mise à jour de article</h4>
-    <?php
-}else{
+
+
+if($_GET['action'] === "forAddChapter"){
     ?>
     <h4>Ajout de article</h4>
     <p>Pour ajouter un articles, il suffit de :</p>
+    <?php
+}else{
+    ?>
+    <h4>Mise à jour de article</h4>
     <?php
 }
 ?>
 <ol>
     <li>Donner un nom au articles.</li>
-    <li>Donner un numéro au articles.</li>
     <li>Remplir le contenu du articles dans l'interface prévue à cet effet.</li>
 </ol>
 <p>Les chapitres restent modifiables après publication.</p>
 
     <form enctype="multipart/form-data"
         <?php
-        if( (isset($_GET['type']) && isset($_GET['action']) && $_GET['action'] == "forUpdateChapter") || $uptade = true ){
+        if( isset($_GET['type']) && isset($_GET['action']) && $_GET['action'] == "forAddChapter"){
             ?>
-            action="/?type=chapter&action=updateChapter&idChapter=<?=$_GET['idChapter']?>"
+            action="/?type=chapter&action=addChapter"
             <?php
         }else{
             ?>
-            action="/?type=chapter&action=addChapter"
+            action="/?type=chapter&action=updateChapter&idChapter=<?=$_GET['idChapter']?>"
             <?php
         }
         ?>
@@ -62,30 +63,7 @@ if(($_GET['action'] === 'forUpdateChapter') || $uptade = true ){
                         
                         required>
                 </div>
-            
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Numéro du Chapitre :</label>
-                    <input type="number" class="form-control<?php
-                    if( !isset($informationChapter['chapter_number']) && ( isset($informationChapter['chapter_name']) && isset($informationChapter['chapter_content']) ) ) {
-                        ?>
-                        is-invalid
-                        <?php
-                    }
-                    ?>
-                    " id="chapterNumber" name="chapter_number" required min="1" placeholder="3"
-                        <?php
-                        if(isset($informationChapter['chapter_number']) ){
-                            ?>
-                            value="<?= $informationChapter['chapter_number']?>"
-                            <?php
-                        }
-                        ?>
-                    >
-                    <div class="invalid-feedback">
-                        Numéro de chapitre déjà utilisé !
-                    </div>
-                    <small id="chapterNumberHelp" class="form-text text-muted">Le numéro de chapitre est un numéro unique, utilisé pour le classement des chapitres.</small>
-                </div>
+                
             </div>
 
             <div class="col-lg-5 offset-lg-1 ">

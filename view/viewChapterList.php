@@ -11,7 +11,7 @@ $gestion = new Gestion;
         <div class="row ">
             <?php while($chapter = $chapters->fetch()){?>
                 <div class="col-lg-12 mb-2 mt-5">
-                    <h4 class="mb-0">Article <?= $chapter['chapter_number'] .' - '. $chapter['chapter_name']?></h4>
+                    <h4 class="mb-0"><?= $chapter['chapter_name']?></h4>
                     <?php $text = $gestion->reductionText($chapter['chapter_content'], 500); ?>
                     <p class="mb-1 mt-1"><?php $date = new \DateTime($chapter['published_date']); echo $date->format('d - M - Y')?></p>
                     <p class="mb-0"><a href="/?type=chapter&action=chapter&idChapter=<?= $chapter['id']?>"><?= $text ?></a></p>

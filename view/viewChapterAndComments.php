@@ -11,10 +11,10 @@ $this->_gestion = new Gestion;
 $monthLetter = $this->_gestion->month($date['month']);
 
 
-$titlePage = "Article ". $use_chapter['chapter_number'] .' - ' .$use_chapter['chapter_name'];
+$titlePage = "Article  - " .$use_chapter['chapter_name'];
 ?>
     <div>
-        <h3>Article <?= $use_chapter['chapter_number'] .' - ' .$use_chapter['chapter_name']; ?></h3>
+        <h3><?= $use_chapter['chapter_name']; ?></h3>
         <p class="mb-4">Publié le <?=$date['day'] ?> <?= $monthLetter ?> <?= $date['year'] ?></p>
         <?php
         if($use_chapter['src_img'] !== "1"){

@@ -6,7 +6,7 @@ require_once('ManagementBDD.php');
 class ManagementChapter extends ManagementBDD{
 
     public function chapterLists(){
-        $posts = $this->_bd->query('SELECT * FROM chapters ORDER BY chapter_number DESC');
+        $posts = $this->_bd->query('SELECT * FROM chapters ORDER BY published_date DESC');
         return $posts;
     }
 
@@ -22,21 +22,24 @@ class ManagementChapter extends ManagementBDD{
         return $comments;
     }
 
-    public function tryNumberChapter($chapter_number){
-        $number = $this->_bd->prepare('SELECT * FROM chapters WHERE chapter_number = :chapter_number');
-        $number->execute(array('chapter_number'=> $chapter_number));
-        return $number;
-    }
-
-    public function registerChapter($chapter_name, $chapter_number, $chapter_content, $src){
-        $registerChapter = $this->_bd->prepare('INSERT INTO chapters(chapter_name, chapter_number, chapter_content, src_img, published_date) VALUES(:chapter_name, :chapter_number, :chapter_content, :src_img, NOW())');
-        $registerChapter->execute(array(
+    public function registerChapter($chapter_name, $chapter_content, $src){
+        $registerChapter = $this->_bd->prepare('INSERT INTO chapters(chapter_name, chapter_content, src_img, published_date) VALUES(:chapter_name, :chapter_content, :src_img, NOW())');
+        $test = $registerChapter->execute(array(
             'chapter_name' => $chapter_name,
-            'chapter_number' => $chapter_number,
             'chapter_content' => $chapter_content,
             'src_img' => $src
         ));
-        return $registerChapter;
+        return $test;
+    }
+
+    public function registerChapterTest($chapter_name, $chapter_content, $src){
+        $register = $this->_bd->prepare('INSERT INTO chapters(chapter_name, chapter_content, src_img, published_date) VALUES(:chapter_name, :chapter_content, :src_img, NOW())'); 
+        $controle = $register->execute(array(
+            'chapter_name' => $chapter_name, 
+            'chapter_content' => $chapter_content, 
+            'src_img' => $src
+        )); 
+        return $controle;
     }
 
     public function forUpdateChapter($id){
@@ -45,21 +48,19 @@ class ManagementChapter extends ManagementBDD{
         return $updateForChapter;
     }
 
-    public function updateChapter($idChapter, $chapter_name, $chapter_number, $chapter_content, $src){
-        $updateChapter = $this->_bd->prepare('UPDATE chapters SET chapter_name= :chapter_name, chapter_number= :chapter_number, chapter_content= :chapter_content, src_img = :src_img WHERE id = :id');
+    public function updateChapter($idChapter, $chapter_name, $chapter_content, $src){
+        $updateChapter = $this->_bd->prepare('UPDATE chapters SET chapter_name= :chapter_name, chapter_content= :chapter_content, src_img = :src_img WHERE id = :id');
         $updateChapter->execute(array(
             'chapter_name' => $chapter_name,
-            'chapter_number' => $chapter_number,
             'chapter_content' => $chapter_content,
             'src_img' => $src,
             'id' => $idChapter
         ));
     }
-    public function deleteImg($idChapter, $chapter_name, $chapter_number, $chapter_content, $src){
-        $updateChapter = $this->_bd->prepare('UPDATE chapters SET chapter_name= :chapter_name, chapter_number= :chapter_number, chapter_content= :chapter_content, src_img = :src_img WHERE id = :id');
+    public function deleteImg($idChapter, $chapter_name, $chapter_content, $src){
+        $updateChapter = $this->_bd->prepare('UPDATE chapters SET chapter_name= :chapter_name, chapter_content= :chapter_content, src_img = :src_img WHERE id = :id');
         $updateChapter->execute(array(
             'chapter_name' => $chapter_name,
-            'chapter_number' => $chapter_number,
             'chapter_content' => $chapter_content,
             'src_img' => $src,
             'id' => $idChapter
@@ -108,7 +109,7 @@ class ManagementChapter extends ManagementBDD{
     }
 
     public function elementsPagination($nbPerPage, $offSet){
-        $elements = $this->_bd->query("SELECT * FROM chapters ORDER BY chapter_number LIMIT $nbPerPage OFFSET $offSet");
+        $elements = $this->_bd->query("SELECT * FROM chapters ORDER BY published_date DESC LIMIT $nbPerPage OFFSET $offSet");
         return $elements;
     }
     
