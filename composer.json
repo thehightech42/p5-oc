@@ -12,6 +12,7 @@
         }
     },
     "require": {
+        "monolog/monolog": "1.0.*",
         "tinymce/tinymce": ">= 5"
     }
 }

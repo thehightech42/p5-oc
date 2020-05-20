@@ -11,7 +11,7 @@ class ManagementBDD {
         try{
             $bd = new \PDO('mysql:host='.$domaineBDD.';dbname='.$BDDName.';charset=utf8', ''.$username.'', ''.$password.'');
         }catch (\Exception $e){
-            throw new \Exception('Merci de contacter l\'administrateur ou de vous reconnecter plus tard.');
+            throw new \Exception('Erreur de connexion à la BDD, merci de contacter l\'administrateur ou de vous reconnecter plus tard.');
         }
         return $bd;
     }

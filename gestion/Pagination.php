@@ -30,7 +30,7 @@ class Pagination
         $this->offset ($this->_currentPage,  $this->_nbPerPage);
         if($this->_currentPage > $this->_nbPages)
         {
-            throw new \Exception ("Page not found", 404);
+            throw new \Exception ("Erreur 404 - Page not found");
         }
 
     }

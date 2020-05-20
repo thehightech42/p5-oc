@@ -9,7 +9,6 @@ use P5\Gestion\Gestion;
 use P5\Controller\ControllerCredit;
 use P5\Router\Router;
 
-
 try {
     if(isset($_GET['type']) && isset($_GET['action'])){
         if($_GET['type'] === "chapter"){
@@ -151,7 +150,7 @@ try {
         elseif($_GET['type'] === "test" && $_GET['action'] === "hash"){
             require('view/hash.php');
         }
-        elseif($_GET['type'] === "home" ){
+        elseif($_GET['type'] === "home"){
             require('view/viewHome.php');
         }
         else{
@@ -163,17 +162,14 @@ try {
         $controller_chapter = new ControllerChapter;
         $controller_chapter->administrationPage();
     }
-    elseif( $_SERVER['REQUEST_URI'] === "/" ){
+    elseif( !isset($_GET['type']) && !isset($_GET['action']) ){
         require('view/viewHome.php');
-    }
-    elseif( preg_match($_SERVER['REQUEST_URI'], '/.*/', $matches) === 1 ){
-        throw new \Exception("Page not found ! ;p", 404);
-    }
-    else{
-        throw new \Exception("Page not found ! ;)", 404);
+        // throw new \Exception("Page not found !", 404);
+
+    }else{
+        throw new \Exception("Page not found !", 404);
     }
 }
 catch(Exception $e) {
-    // die ('Erreur : ' . $e->getMessage());
     require("view/viewError.php"); 
 }

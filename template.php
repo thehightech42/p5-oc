@@ -8,19 +8,18 @@ require('env.php')
         <meta charset="utf-8"/>
         <title> <?= $titlePage; ?> </title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-        
+
         <meta name="title" content="<?= $titlePage ?>"/>
-        <meta name="description" content="Blog - Antonin PFISTNER | Développeur Full Stack"/>
+        <meta name="description" content="Antonin Pfistner | Etudiant développeur Web Full Stack"/>
         <meta name="url" content="http://p5.antoninpfistner.fr"/>
-       
 
         <meta name="twitter:card" content="summary"/>
         <meta name="twitter:title" content="<?= $titlePage ?>"/>
-        <meta name="twitter:description" content="Blog - Antonin PFISTNER | Développeur Full Stack"/>
+        <meta name="twitter:description" content="Antonin Pfistner | Etudiant développeur Web Full Stack"/>
 
         <meta property="og:title" content="<?= $titlePage ?>"/>
-        <meta property="og:description" content="Blog - Antonin PFISTNER | Développeur Full Stack"/>
-        <meta property="og:type" content="Blog et API"/>
+        <meta property="og:description" content="Antonin Pfistner | Etudiant développeur Web Full Stack"/>
+        <meta property="og:type" content="Un blog d'étudiant avec une api calculer des informations de crédit."/>
         <meta property="og:url" content="http://p5.antoninpfistner.fr"/>
 
         <!--CSS Bootstrap-->
