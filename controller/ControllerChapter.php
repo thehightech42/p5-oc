@@ -61,12 +61,10 @@ use P5\Gestion\CheckFile;
                     $chapter_image = 1;
                 endif;
                 if($chapter_image !== 1){
-                    // echo"Img</br>";
                     $checkFile = new CheckFile(".jpg,.jpeg,.png,.gif", 5000000, $chapter_image);
                     $testFile = $checkFile->check();
                     
                     if($testFile === true){
-                        // echo "Test ok </br>";
                         $name = $checkFile->uniqueName();
                         $src = "img/img-article/".$name;
                         $displacement = move_uploaded_file($chapter_image['tmp_name'], $src);
@@ -74,7 +72,6 @@ use P5\Gestion\CheckFile;
                         if($displacement){
                             $registerChapter = $this->_managementChapter->registerChapter($chapter_name, $chapter_number, $chapter_content, $src);
                             $newList = $this->chapterList();
-                            // echo "Déplacement </br>";
                             }else{
                                 $informationChapter["info_img"] ="Enregistrement du fichier impossible";
                                 $echecAddChapter = $this->addChapter($informationChapter);
